@@ -15,22 +15,22 @@ class Color{
 }
 
 class Loom{
-  harnessCount: Number;
-  treadleCount: Number;
+  harnessCount: number;
+  treadleCount: number;
   // vertical
-  warpThreadCount: Number;
+  warpThreadCount: number;
   // horizontal
-  weftThreadCount: Number;
+  weftThreadCount: number;
   harnesses: Harness[];
   treadles: Treadle[];
   treadling: Treadling;
   warpThreads: Thread[];
   weftThreads: Thread[];
 
-  constructor(harnessCount: Number, 
-              treadleCount: Number, 
-              weftThreadCount: Number, 
-              warpThreadCount: Number){
+  constructor(harnessCount: number, 
+              treadleCount: number, 
+              weftThreadCount: number, 
+              warpThreadCount: number){
     this.harnessCount = harnessCount;
     this.treadleCount = treadleCount;
     this.warpThreadCount = warpThreadCount;
@@ -53,33 +53,40 @@ class Loom{
     }
     for(let i = 0; i < treadleCount; i++){
       this.treadles.push(new Treadle());
+      
     }
   }
   setupWarpThreads(colors: Color[]){}
   setUpWeftThreads(colors: Color[]){}
-  print(){
-    let weave = [];
-    for(let i = 0; i < this.weftThreadCount; i++){
-      weave.push([]);
-      for(let j = 0; j < this.warpThreadCount; j++){
-        weave[i].push(" ")
-      }
-    }
-    // iterate through treadling instructions
-    // iterate through harnesses attached to treadles
-    // iterate through threads attached to harness
-    // threads provide x position
-    // treadling instruction index provides y positioni
-    // use x and y position to index into weave
-    // character is determined by whether
-    //    warp/vertical thread was attached to harness
-    //    otherwise use character of weft/horizontal thread
-    for(let i = 0; i < this.weftThreadCount; i++){
-      for(let j = 0; j < this.warpThreadCount; j++){
-        // weave[][] = 
-      }
+  beat(instructionID: number){
+    let weftText = this.weftThreads[instructionID].text;
+    for(let i = 0; i < this.warpThreadCount; i++){
+      return;
     }
   }
+  // print(){
+  //   let weave = [];
+  //   for(let i = 0; i < this.weftThreadCount; i++){
+  //     weave.push([]);
+  //     for(let j = 0; j < this.warpThreadCount; j++){
+  //       weave[i].push(" ")
+  //     }
+  //   }
+  //   // iterate through treadling instructions
+  //   // iterate through harnesses attached to treadles
+  //   // iterate through threads attached to harness
+  //   // threads provide x position
+  //   // treadling instruction index provides y positioni
+  //   // use x and y position to index into weave
+  //   // character is determined by whether
+  //   //    warp/vertical thread was attached to harness
+  //   //    otherwise use character of weft/horizontal thread
+  //   this.treadling.instructions.forEach(treadle => {
+  //     treadle.harnesses.forEach(harness => {
+  //     }
+  //     }
+  //   }
+  // }
 }
 
 class Treadling{
@@ -92,16 +99,16 @@ class Treadling{
 }
 
 class Treadle{
-  harnesses: Harness[];
+  harnesses: Set<Harness>;
   attachHarness(harness: Harness){
-    this.harnesses.push(harness);
+    this.harnesses.add(harness);
   }
 }
 
 class Harness{
-  threads: Thread[];
+  threads: Set<Thread>;
   attachThread(thread: Thread){
-    this.threads.push(thread);
+    this.threads.add(thread);
   }
 }
 
@@ -147,7 +154,6 @@ loom.treadling.instructions = [
   loom.treadles[2],
   loom.treadles[3]
 ]
-loom.print();
 
 /*
 | — | — | — | —
