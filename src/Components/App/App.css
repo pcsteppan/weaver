@@ -1,3 +1,6 @@
-header{
-  color: white;
+.App {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  justify-items: start;
+  align-items: start;
 }

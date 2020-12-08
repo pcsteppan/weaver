@@ -10,7 +10,6 @@
 }
 
 .weavingTableContainer>table>tbody>tr>td.toggleCell:hover{
-  background-color: white;
   border: none;
 }
 

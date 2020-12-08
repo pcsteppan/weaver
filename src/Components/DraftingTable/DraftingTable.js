@@ -2,16 +2,16 @@ import React from 'react';
 import SubTable from '../SubTable/SubTable'
 
 class DraftingTable extends React.Component{
+  arrayFiller(rows, cols) {
+    const array = new Array(rows).fill([]).map(() => {
+      return new Array(cols).fill(false)
+    });
+    // array.fill(new Array(cols).fill(false));
+    return array;
+  }
+  
   constructor(props){
     super(props);
-
-    const arrayFiller = (rows, cols) => {
-      const array = new Array(rows).fill([]).map(() => {
-        return new Array(cols).fill(false)
-      });
-      // array.fill(new Array(cols).fill(false));
-      return array;
-    }
 
     const weftCount = 50;
     const warpCount = 50;
@@ -23,10 +23,10 @@ class DraftingTable extends React.Component{
       warpCount: warpCount,
       harnessCount: harnessCount,
       treadleCount: treadleCount,
-      threadingTableData: arrayFiller(harnessCount, warpCount),
-      tieupTableData: arrayFiller(harnessCount, treadleCount),
-      weavingTableData: arrayFiller(weftCount, warpCount),
-      treadlingTableData: arrayFiller(weftCount, treadleCount)
+      threadingTableData: this.arrayFiller(harnessCount, warpCount),
+      tieupTableData: this.arrayFiller(harnessCount, treadleCount),
+      weavingTableData: this.arrayFiller(weftCount, warpCount),
+      treadlingTableData: this.arrayFiller(weftCount, treadleCount)
     }
     
     this.handleToggle = this.handleToggle.bind(this);
@@ -44,7 +44,7 @@ class DraftingTable extends React.Component{
   }
 
   updateWeave() {
-    const newWeavingData = Array.from(this.state.weavingTableData)
+    const newWeavingData = this.arrayFiller(this.state.weftCount, this.state.warpCount);
     this.state.treadlingTableData.forEach((row, rowIndex) => {
       // find active treadle
       let treadleIndex = 0;
@@ -113,6 +113,104 @@ class DraftingTable extends React.Component{
       </tbody>
       </table>
     )
+  }
+
+  arrayDimensionsFromString(str) {
+    let min = Number.MAX_VALUE;
+    let max = Number.MIN_VALUE;
+    let sepStr = str.split(",");
+    let length = 0;
+    sepStr.forEach(substring => {
+      if(substring.includes("-")) {
+        substring.split("-").forEach(num => {
+          min = Math.min(min, parseInt(num));
+          max = Math.max(max, parseInt(num));
+        })
+      } else {
+        min = Math.min(min, parseInt(substring));
+        max = Math.max(max, parseInt(substring));
+      }
+      length += 1;
+    })
+    const numCols = length;
+    const numRows = max-min;
+    return {
+      rows: numRows+1,
+      cols: numCols,
+    }
+  }
+
+  expandPatternString(str) {
+    // 1x4 = 1,1,1,1,
+    const regex = /(\d+)x(\d+)/g;
+    let newStr = str.replaceAll(regex, (match, p1, p2) => {
+      const newSubstring = (p1+",").repeat(p2)
+      return newSubstring
+    })
+    
+    newStr = newStr.replaceAll(/,,/g, ",")
+    if (newStr.endsWith(",")) 
+      newStr = newStr.substring(0, newStr.length-1);
+    return newStr;
+  }
+
+  patternDataFromString(str, tableName) {
+    const expandedPatternString = this.expandPatternString(str);
+    const patternData = expandedPatternString.split(",")
+    const patternDimensions = this.arrayDimensionsFromString(expandedPatternString);
+    let newTableData;
+    if(tableName==="threading"){
+      newTableData = this.arrayFiller(patternDimensions.rows, patternDimensions.cols);
+      for(let col = 0; col < patternDimensions.cols; col++){
+        const row = parseInt(patternData[patternDimensions.cols-1-col]) - 1;
+        newTableData[patternDimensions.rows-1-row][col] = true;
+      }
+    } else if (tableName==="tieup") {
+      newTableData = this.arrayFiller(patternDimensions.rows, patternDimensions.cols);
+      for(let col = 0; col < patternDimensions.cols; col++){
+        const rows = patternData[col];
+        rows.split("-").forEach(rowStr => {
+          const row = parseInt(rowStr) - 1;
+          newTableData[patternDimensions.rows-1-row][col] = true;
+        })
+      }
+    } else if(tableName==="treadling"){
+      newTableData = this.arrayFiller(patternDimensions.cols, patternDimensions.rows);
+      for(let row = 0; row < patternDimensions.cols; row++){
+        const col = parseInt(patternData[row]) - 1;
+        newTableData[row][col] = true;
+      }
+    } else {
+      throw new Error("tableName isn't threading, treadling, or tieup");
+    }
+    return newTableData;
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.patternData === null) return;
+    if(prevProps.patternData === this.props.patternData) return;
+    const threadingData = this.patternDataFromString(this.props.patternData.data.threading, "threading");
+    const tieupData = this.patternDataFromString(this.props.patternData.data.tieup, "tieup");
+    const treadlingData = this.patternDataFromString(this.props.patternData.data.treadling, "treadling");
+
+    const weftCount = treadlingData.length;
+    const warpCount = threadingData[0].length;
+    const harnessCount = threadingData.length;
+    const treadleCount = treadlingData.length;
+
+    const newState = {
+      weftCount:weftCount,
+      warpCount: warpCount,
+      harnessCount: harnessCount,
+      treadleCount: treadleCount,
+      threadingTableData: threadingData,
+      tieupTableData: tieupData,
+      treadlingTableData: treadlingData
+    }
+
+    this.setState(newState, () => {
+      this.setState({weavingTableData: this.updateWeave()});
+    });
   }
 }
 
