@@ -1,10 +1,11 @@
 .patternItem{
   color: white;
-  font-size: 1.4rem;
+  font-size: 1rem;
   border-top: 1px solid white;
   margin-bottom: 1em;
   padding-top: 4px;
   padding-left: 0.5em;
   width: 100%;
   cursor: context-menu;
+  list-style-type: square;
 }

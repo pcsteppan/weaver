@@ -17,7 +17,6 @@ class ToggleCell extends React.Component {
           onClick={this.handleClick}
           data-row={this.props.row}
           data-col={this.props.col}>
-        
       </td>
     )
   }

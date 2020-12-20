@@ -15,8 +15,8 @@ class SubTable extends React.Component {
     return data.map((row, rowIndex) => {
       return [row.map((cell, colIndex) => {
         return <ToggleCell key={`${colIndex}_${rowIndex}`}
-          row={rowIndex} 
-          col={colIndex} 
+          row={rowIndex}
+          col={colIndex}
           toggle={this.handleToggle}
           isActive={cell}/>
       })]

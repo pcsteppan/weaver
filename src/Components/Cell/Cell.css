@@ -1,0 +1,16 @@
+.cell{
+  width: 12px;
+  height: 12px;
+  background-color: gray;
+  border: 1px dashed rgb(36, 36, 36);
+}
+
+.weavingTableContainer>table>tbody>tr>td.cell{
+  background-color: white;
+}
+
+.weavingTableContainer>table>tbody>tr>td.cell:hover{
+  border: none;
+}
+
+

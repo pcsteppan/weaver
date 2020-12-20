@@ -15,14 +15,14 @@ class PatternItemList extends React.Component{
 
   render(){
     return (
-    <ol>
+    <ul>
       {patterns.map((pattern, i) => {
         return <PatternItem
           handleChange={this.handleChange}
           index={i}
           data={pattern} />
       })}
-    </ol>
+    </ul>
     )
   }
 }
