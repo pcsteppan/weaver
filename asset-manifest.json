@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/weaver/static/css/main.111f9ca2.chunk.css",
+    "main.js": "/weaver/static/js/main.54ea70dc.chunk.js",
+    "main.js.map": "/weaver/static/js/main.54ea70dc.chunk.js.map",
+    "runtime-main.js": "/weaver/static/js/runtime-main.609bbb93.js",
+    "runtime-main.js.map": "/weaver/static/js/runtime-main.609bbb93.js.map",
+    "static/js/2.f54c009b.chunk.js": "/weaver/static/js/2.f54c009b.chunk.js",
+    "static/js/2.f54c009b.chunk.js.map": "/weaver/static/js/2.f54c009b.chunk.js.map",
+    "static/js/3.a7f5095e.chunk.js": "/weaver/static/js/3.a7f5095e.chunk.js",
+    "static/js/3.a7f5095e.chunk.js.map": "/weaver/static/js/3.a7f5095e.chunk.js.map",
+    "index.html": "/weaver/index.html",
+    "static/css/main.111f9ca2.chunk.css.map": "/weaver/static/css/main.111f9ca2.chunk.css.map",
+    "static/js/2.f54c009b.chunk.js.LICENSE.txt": "/weaver/static/js/2.f54c009b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.609bbb93.js",
+    "static/js/2.f54c009b.chunk.js",
+    "static/css/main.111f9ca2.chunk.css",
+    "static/js/main.54ea70dc.chunk.js"
+  ]
+}
