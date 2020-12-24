@@ -57,10 +57,10 @@ class Thread implements ThreadInterface {
     if("default" in representation){
       if(this.type === 'WARP'){
         // default warp thread color is black
-        this.representation = {backgroundColor: "#ff0"}
+        this.representation = {backgroundColor: "#bb8"}
       } else {
         // default weft thread color is white
-        this.representation = {backgroundColor: "#00f"}
+        this.representation = {backgroundColor: "#229"}
       }
     }
   }

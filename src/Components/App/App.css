@@ -1,6 +1,8 @@
 .App {
   display: grid;
+  width: 100%;
   grid-template-columns: 20% 80%;
-  justify-items: start;
-  align-items: start;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
 }

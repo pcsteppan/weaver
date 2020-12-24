@@ -2,6 +2,7 @@ import React from 'react';
 import SubTable from '../SubTable/SubTable'
 import WeavingSubTable from '../WeavingSubTable/WeavingSubTable'
 import Loom from '../../Classes/Loom.ts';
+import './DraftingTable.css';
 
 class DraftingTable extends React.Component{
   arrayFiller(rows, cols, value) {
@@ -125,7 +126,7 @@ class DraftingTable extends React.Component{
 
   render(){
     return(
-      <table>
+      <table className="draftingTable">
       <tbody>
         <tr>
           <td className="threadingTableContainer">

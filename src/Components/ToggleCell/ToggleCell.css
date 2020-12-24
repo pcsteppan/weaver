@@ -1,24 +1,26 @@
 .toggleCell{
   width: 12px;
   height: 12px;
-  background-color: gray;
-  border: 1px dashed rgb(36, 36, 36);
+  border: 1px solid #1d2128;
+  /* border-right: 1px solid #090b0c; */
+  /* border-bottom: 1px solid #090b0c; */
+  background: #15171c;
 }
 
-.weavingTableContainer>table>tbody>tr>td.toggleCell{
+/* .weavingTableContainer>table>tbody>tr>td.toggleCell{
   background-color: white;
-}
+} */
 
 .weavingTableContainer>table>tbody>tr>td.toggleCell:hover{
   border: none;
 }
 
 .toggleCell.active{
-  background-color: black !important;
+  background-color: #8aa !important;
 }
 
 .toggleCell:hover{
-  border: 1px solid red;
+  background: #85878c;
 }
 
 

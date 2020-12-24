@@ -15,7 +15,7 @@ class PatternItemList extends React.Component{
 
   render(){
     return (
-    <ul>
+    <ul class="patternList">
       {patterns.map((pattern, i) => {
         return <PatternItem
           handleChange={this.handleChange}
